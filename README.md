@@ -125,7 +125,7 @@ If the filename contains a label keyword (for example `_Abnormal`, `_Normal`, `t
 
 | File | Description | Status |
 |---|---|---|
-| `qtb_model_final.pth` | Final model used by the app (`model_state_dict`, `classes`, `history`) | Link pending: `TODO: Kaggle model URL or GitHub Release URL` |
+| `qtb_model_final.pth` | Final model used by the app (`model_state_dict`, `classes`, `history`) | Kaggle model card: https://www.kaggle.com/models/sowmyaabirami/qcnn-tuberclosis |
 | `qcnn_phase3_best.pth` | Qiskit-era QCNN checkpoint from `01_qiskit_baseline` | Starting point for the fine-tuning experiment |
 | `icmr_finetuned_best.pth` | Fine-tuned on ICMR DICOMs only | Experimental, not validated (see Limitations) |
 
