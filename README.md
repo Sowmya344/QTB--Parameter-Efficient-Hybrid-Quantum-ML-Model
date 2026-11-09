@@ -24,6 +24,20 @@ Test set: DB2 test split, 1,936 images. Single run, single seed (42).
 
 Validation accuracy peaked at 90.7% during the final phase of training.
 
+### Figures
+
+**Training progress (loss and validation accuracy per phase)**
+
+![Training phase results](training%20phase%20results.png)
+
+**Phase 3 evaluation**
+
+![Phase 3 evaluation results](phase%203%20evaluation%20results.png)
+
+**Grad-CAM on test images (top: correct predictions, bottom: wrong predictions)**
+
+![Grad-CAM](grad%20cam%20image.png)
+
 ---
 
 ## Model
@@ -36,6 +50,12 @@ Chest X-ray (224×224 RGB)
   ├─ QCNN (PennyLane, 4 qubits, 16 trainable parameters)  → ⟨Z⟩ on qubit 3
   └─ Linear(1 → 2) head                                   → Normal / TB
 ```
+
+### Quantum circuit
+
+The circuit below is drawn from the same QNode used in `app.py` (`default.qubit`, angle embedding on the 4 projector outputs). Reading left to right: angle embedding, then HEAD (RY rotations and CNOTs on qubit pairs 0–1 and 2–3), then MIDDLE (CRZ pooling, RY rotations, CNOT between qubits 1 and 3), then BODY (CRZ and RY on qubit 3). The measurement is ⟨Z⟩ on qubit 3.
+
+![QCNN circuit](qcnn_circuit.png)
 
 The 16 quantum parameters are split into three layers:
 
@@ -63,6 +83,10 @@ The 16 quantum parameters are split into three layers:
 │   ├── 03_final_model.ipynb            Final model, produces qtb_model_final.pth
 │   ├── 04_icmr_finetune.ipynb          Experiment: fine-tuning on ICMR DICOMs only
 │   └── validation_notebook.ipynb       TODO: describe
+├── qcnn_circuit.png                    Circuit diagram (used in this README)
+├── training phase results.png          Training figure
+├── phase 3 evaluation results.png      Evaluation figure
+├── grad cam image.png                  Grad-CAM figure
 ├── requirements.txt
 └── README.md
 ```
